@@ -112,7 +112,7 @@ NBER Working Paper 34034}
 
 % 4 ------------------------------------------------------------------
 \begin{frame}{What I Did}
-  \small
+  \footnotesize
   \textbf{1. Audited the variance-U-shape claim (Prop.\ 3(b), Appendix A.3).}
   The naive claim --- ``variance is U-shaped in $\theta$, no conditions'' ---
   fails: it holds only under condition (30). But the paper's own proof text
@@ -127,21 +127,20 @@ NBER Working Paper 34034}
     \ \text{is not.}
   \]
 
-  \smallskip
-  \textbf{2. Tested Definition 1's channel symmetry (\texttt{extensions/definition-asymmetry.md}).}
-  Isolating the precision channel ($p$ only) gives a clean value gain
-  $\theta/s$. Isolating the cost channel first looked \emph{impossible} under
-  the paper's own normalization $c(0;\theta)=0$ --- I initially described this
-  as failing ``eventually,'' which was imprecise: the contradiction is
-  immediate, at every $e>0$. Relaxing that normalization (letting a fixed
-  overhead shrink with $\theta$) produced an explicit, verified construction
-  where the cost-only channel \emph{is} valid on the full domain.
+  \textbf{2. Tested Definition 1's channel symmetry (see extensions).}
+  Isolating the precision channel ($p$ only) gives value gain $\theta/s$.
+  Isolating the cost channel first looked \emph{impossible} under the
+  paper's own normalization $c(0;\theta)=0$ --- I initially called this
+  failing ``eventually,'' which was imprecise: the contradiction is
+  immediate, at every $e>0$. Relaxing that normalization produced an
+  explicit, verified construction where the cost channel \emph{is} valid on
+  the full domain.
 
   \begin{alertblock}{Takeaway}
-    Both findings share a shape: a claim that looks unconditional on first
-    read turns out to depend on an assumption the paper (or I) didn't
-    surface --- condition (30) vs.\ the unconditional sign of $B$; the
-    normalization $c(0;\theta)=0$ vs.\ Definition 1 itself.
+    \footnotesize Both findings share a shape: a claim that looks
+    unconditional turns out to depend on an assumption left unsurfaced ---
+    condition (30) vs.\ the unconditional sign of $B$; the normalization
+    $c(0;\theta)=0$ vs.\ Definition 1 itself.
   \end{alertblock}
 \end{frame}
 
