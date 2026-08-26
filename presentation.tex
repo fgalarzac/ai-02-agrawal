@@ -3,112 +3,184 @@
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 \usepackage{amsmath,amssymb}
-\usepackage{booktabs}
+\usepackage{graphicx}
 \usetheme{default}
 \usecolortheme{seahorse}
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{footline}[frame number]
-\setbeamerfont{frametitle}{size=\large}
+\setbeamerfont{frametitle}{size=\Large}
+\setbeamerfont{title}{size=\LARGE}
+\setbeamersize{text margin left=7mm,text margin right=7mm}
 
-\title{Aouad, Lykouris \& Zhong (2026)}
-\subtitle{\emph{Human-AI Productivity Paradoxes} --- Section 2}
-\author{Alexander Quispe}
-\date{Repository 1 \textperiodcentered{} Week of August 17--22}
+\definecolor{accent}{RGB}{55,76,118}
+\setbeamercolor{structure}{fg=accent}
+\setbeamercolor{alerted text}{fg=red!70!black}
+
+\title{The Economics of Bicycles for the Mind}
+\subtitle{Agrawal, Gans \& Goldfarb (2025)\\[0.4em]
+NBER Working Paper 34034}
+\author{}
+\date{}
 
 \begin{document}
 
-%================= PORTADA (con el enlace al repositorio) =============
+% 1 ------------------------------------------------------------------
 \begin{frame}[plain]
   \titlepage
-  \begin{center}\small
-    \texttt{github.com/alexanderquispe/ai-01-aouad}
+  \vspace{-1.1em}
+  \begin{center}
+    \small\url{https://github.com/fgalarzac/ai-02-agrawal}
+
+    \vfill
+    \footnotesize Repository 2 --- Artificial Intelligence and Economic Modeling
   \end{center}
 \end{frame}
 
-%================= 1. EL ART\'ICULO ====================================
-\begin{frame}{1 \textperiodcentered{} The paper and the agent's problem}
-  \textbf{Question.} When does AI assistance make a worker \emph{less} productive?
-
-  \medskip
-  \textbf{The single mechanism.} AI is a \emph{perfectly substitutable input}:
-  skill, effort and assistance enter production only through their sum.
-  \[ x \;=\; s + e + a \]
-
-  \medskip
-  \textbf{The agent's problem.} Choose effort $e$ to maximise output net of a
-  \emph{linear} cost:
-  \[ \max_{e \ge 0}\; p(s+e+a) \;-\; \gamma e \]
+% 2 ------------------------------------------------------------------
+\begin{frame}{The Paper: Cognitive Tools and Human Capabilities}
+  \textbf{Question.} Why does the empirical record on cognitive technology and
+  inequality look contradictory --- computers raised productivity \emph{and}
+  inequality, while AI often raises productivity while \emph{reducing} it
+  within firms?
 
   \smallskip
-  \begin{itemize}\small
-    \item $p$ weakly increasing, concave, twice differentiable; $\gamma>0$.
-    \item Only constraint: $e \ge 0$ --- and it binds. That is the whole result.
-  \end{itemize}
+  \textbf{The single mechanism.} A cognitive tool is a substitute for
+  implementation skill $s$, but a complement to judgment --- and judgment
+  splits into two skills that behave differently:
+  \begin{columns}[T,onlytextwidth]
+    \column{0.48\textwidth}
+      \textbf{Opportunity judgment $\gamma$}
+      \begin{itemize}
+        \item Spotting a chance to improve the task
+        \item \emph{Always} complemented by a better tool
+      \end{itemize}
+    \column{0.48\textwidth}
+      \textbf{Payoff judgment $\alpha$}
+      \begin{itemize}
+        \item Acting correctly on a successful implementation
+        \item Complemented only \emph{conditionally}
+      \end{itemize}
+  \end{columns}
+
+  \vspace{-0.1em}
+  \begin{block}{Agent's problem}
+    \vspace{-0.7em}
+    \[
+      \max_{e_t\geq0}\; M(e_t;\theta)=p(se_t;\theta)\,\alpha\,\Delta-c(e_t;\theta)
+    \]
+    \vspace{-1.0em}
+    \[
+      \text{FOC:}\quad p'(se_t^*;\theta)\,s\alpha\Delta=c'(e_t^*;\theta)
+    \]
+  \end{block}
 \end{frame}
 
-%================= 2. EL RESULTADO ===================================
-\begin{frame}{2 \textperiodcentered{} Proposition 2.1, with all its conditions}
-  Define $x^{*}$ as the \emph{largest} maximiser of $p(x)-\gamma x$:
-  \[ x^{*} \;=\; \max\,\arg\max_{x}\;\bigl[\,p(x)-\gamma x\,\bigr] \]
+% 3 ------------------------------------------------------------------
+\begin{frame}{The Main Result: Proposition 1, with All Its Conditions}
+  \small
+  \begin{block}{Definition 1 (cognitive tool)}
+    \vspace{-0.6em}
+    For all $e$ and all $\theta'>\theta$:
+    \[
+      \text{(i) } p(se;\theta')\geq p(se;\theta),\ \ c(e;\theta')\leq c(e;\theta)
+      \qquad\qquad
+      \text{(ii) } \frac{p'(se;\theta)}{c'(e;\theta)}\ \text{strictly decreasing in }\theta
+    \]
+  \end{block}
 
-  \textbf{Regularity condition} (without it $x^{*}$ need not exist):
-  \[ \limsup_{x\to\infty} \frac{p(x)}{x} \;<\; \gamma \]
+  \vspace{-0.3em}
+  \begin{block}{Proposition 1}
+    \vspace{-0.5em}
+    Under Definition 1 and the standing regularity assumptions ($p$ increasing,
+    weakly concave; $c$ increasing, weakly convex), as $\theta$ rises from $0$
+    to $1$:
+    \[
+      \begin{gathered}
+        \text{1. } e_t^*(1)<e_t^*(0)\ \text{for all }t
+        \qquad\qquad
+        \text{2. } e_t^*(\theta)=e^*(\theta)\ \text{for all }t\\[0.3em]
+        \text{3. } V_0(1)>V_0(0)
+      \end{gathered}
+    \]
+  \end{block}
 
-  \medskip
-  \textbf{Then}
-  \[ e^{*}(s,a) = \bigl(x^{*}-s-a\bigr)_{+}, \qquad
-     p^{*}(s,a) = \max\bigl\{\,p(x^{*}),\; p(s+a)\,\bigr\} \]
-
-  \medskip
-  \footnotesize\emph{Intuition.} The agent has one target level of total input;
-  he tops it up with effort, and once skill plus AI already reach it he simply
-  stops working.
+  \vspace{-0.2em}
+  \centering\emph{A better tool lowers the marginal payoff of effort relative
+  to its cost, so the agent works less per opportunity --- but net benefit
+  still rises, so does the value of the whole process.}
 \end{frame}
 
-%================= 3. LO QUE HICE ====================================
-\begin{frame}{3 \textperiodcentered{} What I did}
-  \textbf{Reproduced} Proposition 2.1 by hand --- the interior-versus-corner
-  split, with no differentiation in the proof (\texttt{hand/}).
+% 4 ------------------------------------------------------------------
+\begin{frame}{What I Did}
+  \small
+  \textbf{1. Audited the variance-U-shape claim (Prop.\ 3(b), Appendix A.3).}
+  The naive claim --- ``variance is U-shaped in $\theta$, no conditions'' ---
+  fails: it holds only under condition (30). But the paper's own proof text
+  goes further: it states ``therefore $B<0$'' as if condition (30) is what
+  establishes $B<0$. In fact $B<0$ follows from Jensen's inequality alone,
+  \emph{independent} of condition (30); the real conditional fact is whether
+  the $\Gamma$-heterogeneity term can overturn it in the full expression.
+  \[
+    B=\frac{\Delta^2}{2}(\mu_\alpha^2+\sigma_\alpha^2)\bigl(1-\mu_sE[1/s]\bigr)\leq0
+    \ \text{unconditionally, yet the sign of }
+    \left.\tfrac{\partial\operatorname{Var}(V(\theta))}{\partial\theta}\right|_{\theta=0}
+    \ \text{is not.}
+  \]
 
-  \medskip
-  \textbf{Assumptions I considered relaxing}
-  \begin{itemize}\small
-    \item \textbf{Linear cost $\to$ convex.} \emph{Dead end}: the authors already
-      do it in Appendix D (Props. D.3, D.6). Replication, not extension.
-    \item \textbf{Myopia.} A two-period agent who internalises skill dynamics.
-      Never relaxed anywhere in the paper --- this is the live one.
-    \item \textbf{Complementarity inside $p(\cdot)$} rather than as an added
-      interaction term. Harder: \S{}4.4 and \S{}5.3 partly pre-empt it.
-  \end{itemize}
+  \smallskip
+  \textbf{2. Tested Definition 1's channel symmetry (\texttt{extensions/definition-asymmetry.md}).}
+  Isolating the precision channel ($p$ only) gives a clean value gain
+  $\theta/s$. Isolating the cost channel first looked \emph{impossible} under
+  the paper's own normalization $c(0;\theta)=0$ --- I initially described this
+  as failing ``eventually,'' which was imprecise: the contradiction is
+  immediate, at every $e>0$. Relaxing that normalization (letting a fixed
+  overhead shrink with $\theta$) produced an explicit, verified construction
+  where the cost-only channel \emph{is} valid on the full domain.
 
-  \medskip
-  \textbf{Also produced} a full step-by-step tutorial of the paper and two
-  lecture decks (\texttt{extra/}).
+  \begin{alertblock}{Takeaway}
+    Both findings share a shape: a claim that looks unconditional on first
+    read turns out to depend on an assumption the paper (or I) didn't
+    surface --- condition (30) vs.\ the unconditional sign of $B$; the
+    normalization $c(0;\theta)=0$ vs.\ Definition 1 itself.
+  \end{alertblock}
 \end{frame}
 
-%================= 4. LA IA =========================================
-\begin{frame}{4 \textperiodcentered{} Where I did not believe the AI}
-  \textbf{What I asked.} ``What is the most natural extension of this model?''
+% 5 ------------------------------------------------------------------
+\begin{frame}{Where I Did Not Believe the AI}
+  \small
+  \textbf{[TEMPLATE --- fill in after completing the hand derivation]}
 
-  \medskip
-  \textbf{What the model answered.} Relax the linear cost $c(e)=\gamma e$ to a
-  strictly convex $c(e)$ --- presented confidently as an open direction.
+  \begin{columns}[T,onlytextwidth]
+    \column{0.72\textwidth}
+      \textbf{What the model claimed:} \emph{[state the specific claim the
+      LLM made that prompted the check --- quote or closely paraphrase it]}
 
-  \medskip
-  \textbf{My verdict: \textcolor{red}{incorrect as an extension}.}
-  \begin{itemize}\small
-    \item Appendix D is titled \emph{``Extension to convex cost functions''} and
-      redoes Sections 2--4 under strictly convex cost.
-    \item So the proposal is already in the paper. I checked the appendix
-      directly rather than taking the answer at face value.
-    \item \emph{Caveat worth keeping:} Appendix D covers \S\S{}2--4 but \textbf{not}
-      \S{}5, so convex cost applied to the skill-polarisation result is genuinely
-      untouched.
-  \end{itemize}
+      \smallskip
+      \textbf{What I checked by hand:} \emph{[name the exact step: e.g.\ the
+      Appendix A.1 ratio-monotonicity argument for Proposition 1, or a step
+      from the extension's derivation]}
 
-  \medskip
-  \footnotesize The step I re-derived by hand is in \texttt{hand/} --- I did not
-  trust the algebra of the first-order condition until I had written it out.
+      \smallskip
+      \textbf{My verdict:} \emph{[state one of: \textbf{correct} /
+      \textbf{incorrect} / \textbf{unverifiable} --- and justify it in one or
+      two sentences referencing what the hand derivation actually showed]}
+
+    \column{0.24\textwidth}
+      \centering
+      \includegraphics[page=1,width=\linewidth,height=0.23\textheight,keepaspectratio]
+        {hand/PLACEHOLDER.pdf}
+
+      \scriptsize Handwritten derivation --- photo, crooked is fine
+  \end{columns}
+
+  \vspace{-0.3em}
+  \begin{alertblock}{How to justify the verdict}
+    \textbf{Correct:} the hand derivation reproduces the claim step-for-step.
+    \textbf{Incorrect:} the hand derivation contradicts a specific step ---
+    name it. \textbf{Unverifiable:} the claim depends on an assumption or
+    computation that cannot be checked by hand in the time available --- say
+    what would be needed.
+  \end{alertblock}
 \end{frame}
 
 \end{document}
