@@ -1,103 +1,88 @@
-# Repository 1 — Aouad, Lykouris & Zhong (2026)
+# Repository 2 — Agrawal, Gans & Goldfarb (2025), "The Economics of Bicycles for the Mind"
 
-*Human-AI Productivity Paradoxes: Modeling the Interplay of Skill, Effort, and AI Assistance*
-[arXiv:2605.11350](https://arxiv.org/abs/2605.11350) · [cs.GT]
-
-> **This is the worked example** for *Artificial Intelligence and Economic
-> Modeling* (UP 2026-II). It shows what a weekly repository looks like when it is
-> done well. Yours does not have to be this long — see "What is required" below.
-
----
+NBER Working Paper 34034, July 2025. **Unrefereed** — circulated for discussion, not peer-reviewed.
+Not to be confused with an arXiv paper of a different title occasionally attributed to these
+authors; this repository works from the NBER PDF directly.
 
 ## What question the paper answers
 
-When does AI assistance make a worker **less** productive?
+Why does the empirical record on cognitive technology and inequality look contradictory?
+Computers raised productivity *and* inequality. AI often raises productivity while *reducing*
+inequality within firms. The paper builds one model of an agent doing iterative task
+improvement, and shows both patterns are special cases of the same mechanism operating on
+different parts of human capability.
 
-The paper picks one mechanism and pushes it: AI is a **perfectly substitutable
-input**. Skill $s$, effort $e$ and assistance $a$ enter production only through
-their sum, $x = s + e + a$. Nothing else is going on — no learning, no
-complementarity, no contracting. Everything that follows comes from that single
-modelling choice plus a linear cost of effort.
+The single mechanism it formalises: a cognitive tool is a substitute for **implementation
+skill** but a complement to **judgment** — and judgment itself splits into two skills that
+behave differently. **Opportunity judgment** (spotting a chance to improve the task) is always
+complemented by a better tool. **Payoff judgment** (correctly acting on a successful
+implementation) is only complemented *conditionally* — only when the tool's direct gain in
+success probability isn't swamped by the effort it lets the agent stop supplying.
 
 ## The agent's problem
 
-$$\max_{e \ge 0}\; p(s+e+a) - \gamma e$$
+In each period, conditional on having identified an opportunity to improve the task, the agent
+chooses effort $e_t \ge 0$ to maximise the net benefit of implementation:
 
-with $p$ weakly increasing, concave and twice differentiable, $\gamma > 0$, and
-one constraint that turns out to carry the whole result: $e \ge 0$.
+$$
+\max_{e_t \ge 0} \; M(e_t;\theta) = p(s e_t;\theta)\,\alpha\,\Delta \;-\; c(e_t;\theta)
+$$
+
+- $s \in (0,1]$: implementation skill
+- $\alpha \in [0,1]$: payoff judgment — probability the agent realises the improvement value $\Delta$ conditional on success
+- $p(se_t;\theta) \in [0,1]$: probability implementation succeeds, increasing and weakly concave in effort
+- $c(e_t;\theta)$: cost of effort, increasing and weakly convex
+- $\theta \ge 0$: quality of the cognitive tool available to the agent
+
+The first-order condition is $p'(se_t^*;\theta)\,s\alpha\Delta = c'(e_t^*;\theta)$. Aggregated
+across periods with opportunity-arrival probabilities $\gamma(t)$ and discount factor $\delta$,
+this yields the agent's continuation value $V_0(\theta)$.
 
 ## The main result, with all its conditions
 
-Let $x^{*}$ be the **largest** maximiser of $p(x) - \gamma x$:
+**Definition 1 (cognitive tool).** A parameter $\theta$ is a cognitive tool if, for all effort
+levels $e$ and all $\theta' > \theta$:
 
-$$x^{*} = \max \arg\max_{x} \left[\, p(x) - \gamma x \,\right]$$
+1. $p(se;\theta') \ge p(se;\theta)$ and $c(e;\theta') \le c(e;\theta)$ — the tool weakly raises
+   success probability and weakly lowers cost at every effort level; and
+2. $\dfrac{p'(se;\theta)}{c'(e;\theta)}$ is strictly decreasing in $\theta$ for all $e>0$ — the
+   tool strictly lowers the marginal-benefit-to-marginal-cost ratio of effort.
 
-This requires a **regularity condition**, without which $x^{*}$ need not exist:
+Together with the standing regularity assumptions ($p$ increasing and weakly concave in
+effort; $c$ increasing and weakly convex), this is exactly what is needed for the result below
+— nothing more is assumed.
 
-$$\limsup_{x \to \infty} \frac{p(x)}{x} < \gamma$$
+**Proposition 1.** Let $e_t^*(\theta)$ be the effort level maximising $M(e;\theta)$ in period
+$t$, and let $V_0(\theta)$ be the agent's expected task quality from $t=0$ given the
+opportunity sequence $\{\gamma(t)\}_{t=0}^{\infty}$. As the agent adopts a cognitive tool
+($\theta$ rises from $0$ to $1$):
 
-**Proposition 2.1.** Under those conditions,
+1. **Effort falls:** $e_t^*(1) < e_t^*(0)$ for every $t$.
+2. **Effort is time-invariant:** $e_t^*(\theta) = e^*(\theta)$ for all $t$ (conditional on an
+   opportunity, the per-period problem doesn't depend on $t$, $\gamma(t)$, or continuation
+   values).
+3. **Expected value rises:** $V_0(1) > V_0(0)$.
 
-$$e^{*}(s,a) = \left(x^{*} - s - a\right)_{+}, \qquad
-  p^{*}(s,a) = \max\left\{ p(x^{*}),\, p(s+a) \right\}$$
+*Intuition in one sentence:* a better tool lowers the marginal payoff of human effort relative
+to its cost, so the agent optimally works less per opportunity — but because the tool also
+directly raises success probability and cuts cost, the net benefit of each opportunity still
+goes up, and so does the value of the whole process.
 
-*Intuition in one sentence:* the agent has a single target level of total input,
-tops it up with effort, and once skill plus AI already reach it he stops working.
+One thing worth flagging for slide 2: the proof (Appendix A.1) does **not** establish that
+success probability itself, $p(se^*(\theta);\theta)$, rises with $\theta$ — only that net
+value $M(e^*(\theta);\theta)$ does. The paper shows this comparison is genuinely ambiguous in
+general (eq. 29) and requires additional structure on $p$ and $c$ to sign. That ambiguity is
+exactly the seed of the paper's later, more conditional results (Prop 2's part on payoff
+judgment, and Prop 3's variance threshold) — which is why we treat Proposition 1 as the floor
+result here and take those up separately in `extensions.md`.
 
-Two things worth noticing about the proof. It is a **case split** — interior
-versus corner — and contains **no differentiation at all**; and the largest-argmax
-tie-break is not decoration, it is what makes $e^{*}$ well defined when
-$p(x)-\gamma x$ has a flat maximum.
+`hand/`: [one line description of what the photo shows — to fill in once the derivation is done]
 
-## Sections 3–5: stated, not derived
-
-The three headline results — the deskilling paradox, the unreliability paradox
-and skill polarisation — use machinery well beyond Section 2: a continuous-time
-birth–death Markov chain and its steady state, Arrow–Pratt risk aversion applied
-to a *production* function with IARA/DARA driving the sign, and Bayesian updating
-over a binary signal. They are worth understanding; they are not worth trying to
-reproduce in a week. See `extra/tutorial-alz-completo.pdf` for the full walk.
-
----
-
-## What is in this repository
+## Repository contents
 
 | File | What it is |
 |---|---|
 | `README.md` | This page |
-| `prompts.md` | The full LLM conversation, unedited |
-| `extensions.md` | Which assumptions could be relaxed, and which are dead ends |
-| `hand/` | The derivation of Proposition 2.1, written out by hand |
-| `presentation.tex` / `.pdf` | The 5-minute Beamer deck |
-| `paper/` | The article itself |
-| `extra/` | Above the floor: a full tutorial of the paper and two lecture decks |
-
-## What is required
-
-Only four things. The rest of this repository is above the floor.
-
-1. **`README.md`** — one page: the question, the agent's problem, the main result
-   **with all its conditions**.
-2. **`prompts.md`** — your prompts and the answers, **raw**. Do not tidy them up:
-   the value is in seeing where the model went wrong.
-3. **`hand/`** — at least one photograph of something you derived by hand. Not the
-   whole paper: the one step you did not believe until you did it yourself.
-4. **`presentation.tex` / `.pdf`** — the 5-minute deck, source and compiled.
-
-Deadline is **Tuesday 22:00**, work merged into `main` through a pull request,
-and the repository URL posted as a comment on that week's issue.
-
-## About `hand/`
-
-`hand/prop-2-1-derivacion-a-mano.pdf` is three phone photos of a notebook page.
-That is exactly the standard: crooked, with crossings-out, no transcription. What
-it shows is the first-order condition and the interior-versus-corner split written
-out step by step — the part I did not want to take on trust.
-
-## About the LLM conversation
-
-`prompts.md` is the export of the session that produced the tutorial in `extra/`.
-Read it for what it gets wrong as much as for what it gets right. The episode
-worth studying is on slide 4 of the presentation: asked for "the most natural
-extension", the model confidently proposed relaxing the linear cost — which the
-authors had already done in Appendix D. It took opening the appendix to find out.
+| `prompts.md` | Raw LLM prompts and answers used this week |
+| `hand/` | Hand-derivation photo(s) |
+| `presentation.tex` / `.pdf` | 5-minute Beamer deck |
