@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/31442667/README.md)
 # Repository 2 — Agrawal, Gans & Goldfarb (2025), "The Economics of Bicycles for the Mind"
 
 NBER Working Paper 34034, July 2025. **Unrefereed** — circulated for discussion, not peer-reviewed.
