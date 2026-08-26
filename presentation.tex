@@ -148,39 +148,39 @@ NBER Working Paper 34034}
 % 5 ------------------------------------------------------------------
 \begin{frame}{Where I Did Not Believe the AI}
   \small
-  \textbf{[TEMPLATE --- fill in after completing the hand derivation]}
+  \textbf{What the model claimed.} In auditing the variance-U-shape result
+  (Prop.\ 3(b), Appendix A.3), the model asserted that, for implementation
+  skill $s$ with mean $\mu_s$ and any strictly positive variance
+  $\sigma_s^2>0$,
+  \[
+    \mu_s\,E\!\left[\frac{1}{s}\right]\geq1
+    \qquad\Longrightarrow\qquad
+    B=\frac{\Delta^2}{2}\bigl(\mu_\alpha^2+\sigma_\alpha^2\bigr)
+      \Bigl(1-\mu_sE[1/s]\Bigr)\leq0
+  \]
+  holds unconditionally --- independent of condition (30) and of any moment
+  of $\Gamma$ --- with Jensen's inequality applied to the convex function
+  $1/x$ on $(0,\infty)$ as the justification.
 
-  \begin{columns}[T,onlytextwidth]
-    \column{0.72\textwidth}
-      \textbf{What the model claimed:} \emph{[state the specific claim the
-      LLM made that prompted the check --- quote or closely paraphrase it]}
+  \smallskip
+  \textbf{What I checked by hand.} I reproduced the three-step chain on
+  paper: Jensen's inequality for a strictly convex function $f$, verified
+  that $1/x$ is strictly convex on $(0,\infty)$ since its second derivative
+  $2/x^3>0$ there; applied it to $s$ to get $E[1/s]\geq1/\mu_s$ and hence
+  $\mu_sE[1/s]\geq1$, with equality only if $s$ is degenerate; and
+  substituted this into the definition of $B$ from eq.\ (69), confirming the
+  sign falls out without invoking condition (30) or any property of $\Gamma$
+  at any step.
 
-      \smallskip
-      \textbf{What I checked by hand:} \emph{[name the exact step: e.g.\ the
-      Appendix A.1 ratio-monotonicity argument for Proposition 1, or a step
-      from the extension's derivation]}
-
-      \smallskip
-      \textbf{My verdict:} \emph{[state one of: \textbf{correct} /
-      \textbf{incorrect} / \textbf{unverifiable} --- and justify it in one or
-      two sentences referencing what the hand derivation actually showed]}
-
-    \column{0.24\textwidth}
-      \centering
-      \includegraphics[page=1,width=\linewidth,height=0.23\textheight,keepaspectratio]
-        {hand/PLACEHOLDER.pdf}
-
-      \scriptsize Handwritten derivation --- photo, crooked is fine
-  \end{columns}
-
-  \vspace{-0.3em}
-  \begin{alertblock}{How to justify the verdict}
-    \textbf{Correct:} the hand derivation reproduces the claim step-for-step.
-    \textbf{Incorrect:} the hand derivation contradicts a specific step ---
-    name it. \textbf{Unverifiable:} the claim depends on an assumption or
-    computation that cannot be checked by hand in the time available --- say
-    what would be needed.
-  \end{alertblock}
+  \smallskip
+  \textbf{My verdict: correct.} The claim that $B\leq0$ unconditionally
+  holds up exactly as stated --- Jensen's inequality alone, applied to
+  implementation-skill heterogeneity, is sufficient, and condition (30)
+  plays no role in establishing this particular fact. What the hand
+  derivation does \emph{not} rescue is the paper's own proof, which uses
+  this unconditional fact as if it were what makes the full derivative in
+  eq.\ (73) negative --- that inferential step is separate from, and not
+  justified by, the claim verified here.
 \end{frame}
 
 \end{document}
